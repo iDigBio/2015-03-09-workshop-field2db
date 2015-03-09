@@ -2,12 +2,13 @@
 
 This presentation will introduce you to web APIs. Some limited prior 
 programming knowledge is assumed: you should know what a function and variables 
-are. 
+are. There are a few lines of sample R code at the end but a general knowlege 
+of programming languages will probably let you understand them.
 
 ## Goals
 
-1. Learn the mechanics of a web API
-1. Compose calls to a web APIs
+1. Learn the basic mechanics of a web API
+1. Compose test calls to a web API
 1. Be able to read web API documentation
 
 ---
@@ -20,7 +21,7 @@ are.
 * using parts of someone else's *Application*
 * and I need an *Interface* that describes the commands and data to do it.
 
-<image>
+![API](image/api_1.png)
 
 So an API is an interface that describes how you can use someone else's 
 application from within your program.
@@ -29,8 +30,8 @@ We talk about API's exposing functionality, being open, and enabling
 interaction. Remember that an API is a description of how to tell another 
 application to do things for you and exchange data with you, programatically. 
 While a web site or an application might let you give commands and get data 
-using a graphical interface the key distiction, and what let's us use words 
-like "expose" and "enable" is the programatic interface.
+using a graphical interface, the key distiction of an API and what let's us use 
+words like "expose" and "enable" is the programatic part.
 
 ---
 
@@ -38,11 +39,11 @@ like "expose" and "enable" is the programatic interface.
 
 There are many types of APIs
 
-<image>
+![API](image/api_2.png)
 
 But the coolest are Web APIs
 
-<image>
+![API](image/api_3.png)
 
 Remember, an API is an *Interface* for your program to use. So what does that 
 make a web API?
@@ -72,29 +73,66 @@ It is all specially formatted text (this is a lie, you can exchange binary
 information too but we're not going to talk about that today), so we can just 
 look at it all and intuit what it means:
 
-<example http exchange><Challenge: what does this mean?>
+```
+mcollins@mjc:~$ telnet www.textfiles.com 80
+Trying 208.86.224.90...
+Connected to www.textfiles.com.
+Escape character is '^]'.
+GET /underconstruction/ HTTP/1.1
+host: www.textfiles.com
+
+HTTP/1.1 200 OK
+Date: Mon, 09 Mar 2015 21:42:13 GMT
+Server: Apache/2.4.10 (FreeBSD)
+Last-Modified: Mon, 12 Oct 2009 21:08:20 GMT
+ETag: "c0f0-475c354493900"
+Accept-Ranges: bytes
+Content-Length: 49392
+Content-Type: text/html
+
+<html>
+<title>Please be patient - This Page is Under Construction!</title>
+<body bgcolor="#ffffff">
+<center>
+<h1>If you have any questions, comments, or suggestions, please <a 
+href="mail">click here</a> to mail me.</h1>
+This small collection was saved from the rapidly dying Geocities, which <a 
+href="http://www.archiveteam.org">Archive Team</a> is working 
+desperately to save for a historical archive. Please consider visit our site and 
+helping us with collecting, education, and writing.
+<p>
+<img src="CoCollegePark8762construct.gif">
+<img src="HeHeartlandFlats7015underconstruction.gif">
+<img src="AtAthensAcropolis6558underconstruction.gif">
+....more images left out...
+```
+
+### Challenge
+
+> How do you know how to interpret the text that you get back from the web 
+> server?
 
 Remember our goal of being able to read documentation? In order to do that, we 
 need to learn the terms that are used for some the different parts of the text 
 that goes back and forth using HTTP.
 
-http://beta-search.idigbio.org/v2/top/records
+![HTTP](image/HTTP.png)
 
 <image highlighting parts of the HTTP transfer above>
 
 So, to rephrase HTTP using our new terms:
 
-1. Request a URL using a method with:
+1. Request a URL (Uniform Resource Locator) from a server made up of:
     1. Server name
     2. Resource name
     3. Parameters
-1. Optionally send data if the method allows it
-1. Recieve headers and content back
+1. Optionally send more text if the method allows it
+1. Recieve headers and content
 
-Don't worry too much about memorizing this now. Working with examples and 
-reading documentation will help. Remember, we're just sending text and getting 
-text back and your goal for understanding HTTP is to be able to understand web 
-API documentation. You'll get help actually doing the requests later.
+Don't worry about memorizing this now. Working with examples and reading 
+documentation will help. Remember, we're just sending text and getting text back 
+and your goal for understanding HTTP is to be able to understand web API 
+documentation. You'll get help actually doing the requests later.
 
 ---
 
@@ -113,7 +151,7 @@ Type this into the address line of your favorite web browser:
 > What is the resource being requested?
 
 You got back text but it's not HTML text so your browser doesn't know what to 
-do with it. Instead, it just displays it. Does the text make sense to you?
+do with it. Instead, it just displays it. Does the text make any sense to you?
 
 ---
 
@@ -128,15 +166,16 @@ coolest format.)
 
 **JSON**: Javascript Object Notation
 
-A *notation* for representing *objects* as text that can be directly executed 
-in *Javascript* as code and will result in a data structure that can be 
-assigned to a variable.
+JSON is a *notation* for representing *objects* as text that can be directly 
+executed in *Javascript* as code and will result in a data structure that can 
+be assigned to a variable.
 
 Although this was originally made for Javascript, many other languages can 
 interpret it. Again, you'll get help with the interpretation from your language 
 later just like you'll get help with HTTP.
 
-What can we denote? Objects and arrays:
+What can we denote? Objects and arrays. Here's the main part of the BNF 
+description of the syntax of JSON:
 
 ![Objects](image/object.gif)
 
@@ -144,7 +183,7 @@ What can we denote? Objects and arrays:
 http://json.org
 
 It's not that scary. Take a look at the output from the API call we made 
-earlier with a little formatting:
+earlier with a little formatting to make is easier to read:
 
 ```
 {
@@ -294,3 +333,5 @@ in R shortly. As a start, consider this R code as your final challenge:
      names(tops$institutioncode)
 
 > Without using R, can you get the output yourself?
+
+---
