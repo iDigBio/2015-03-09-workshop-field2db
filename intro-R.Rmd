@@ -111,6 +111,15 @@ What is the content of this vector?
 q <- c(x, x, 5)
 ```
 
+What is the value of `y` at the end of this script?
+
+```r
+x <- 1
+y <- x + 2
+x <- 3
+# y <- ???
+```
+
 ---
 
 We can also use these objects with functions, for instance to compute the mean
