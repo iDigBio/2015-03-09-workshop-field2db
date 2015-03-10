@@ -51,9 +51,13 @@ coherent in their usage.
 
 ## Creating objects
 
+```{r, purl=TRUE, echo=FALSE}
+## Creating objects
+```
+
 Let's start by creating a simple object:
 
-```r
+```{r, purl=FALSE}
 x <- 10
 x
 ```
@@ -69,7 +73,7 @@ instance `read.csv(file="data/some_data.csv")`.
 
 Now that `x` exists in R memory, We can do things with it. For instance:
 
-```r
+```{r, purl=FALSE}
 x * 2
 x + 5
 x + x
@@ -77,13 +81,13 @@ x + x
 
 or we can create new objects using `x`:
 
-```r
+```{r, purl=FALSE}
 y <- x + x + 5
 ```
 
 Let's try something different:
 
-```r
+```{r, purl=FALSE}
 x <- c(2, 4, 6)
 x
 ```
@@ -95,7 +99,7 @@ Two things:
 
 Using the `[]`, we can access individual elements of this object:
 
-```r
+```{r, purl=FALSE}
 x[1]
 x[2]
 x[3]
@@ -107,13 +111,13 @@ x[3]
 
 What is the content of this vector?
 
-```r
+```{r, purl=TRUE}
 q <- c(x, x, 5)
 ```
 
 What is the value of `y` at the end of this script?
 
-```r
+```{r, purl=TRUE}
 x <- 1
 y <- x + 2
 x <- 3
@@ -125,9 +129,10 @@ x <- 3
 We can also use these objects with functions, for instance to compute the mean
 and the standard deviation:
 
-```r
+```{r, purl=FALSE}
+x <- c(1, 3, 5, 6, 3, 5)
 mean(x)
-sd(d)
+sd(x)
 ```
 
 This is useful to print the value of the mean or the standard deviation, but we
@@ -235,7 +240,7 @@ fav_colors[c(2,3,2,4,1,2)]
 or if the vector is named, it can be accessed by the names of the elements:
 
 ```r
-fav_colors["John"]
+fav_colors[c("John")]
 ```
 
 ---
@@ -363,6 +368,7 @@ x + c(2, 4, 6, 8, 10, 12, 14) # warning
 
 ```r
 u <- c(1, 4, 2, 5, 6, 3, 7)
+u[TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE]
 u < 3
 u[u < 3]
 u[u < 3 | u >= 4]
