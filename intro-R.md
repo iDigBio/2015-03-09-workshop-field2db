@@ -51,11 +51,18 @@ coherent in their usage.
 
 ## Creating objects
 
+
+
 Let's start by creating a simple object:
+
 
 ```r
 x <- 10
 x
+```
+
+```
+## [1] 10
 ```
 
 We assigned to `x` the number 10. `<-` is the assignment operator. It assigns
@@ -69,13 +76,33 @@ instance `read.csv(file="data/some_data.csv")`.
 
 Now that `x` exists in R memory, We can do things with it. For instance:
 
+
 ```r
 x * 2
+```
+
+```
+## [1] 20
+```
+
+```r
 x + 5
+```
+
+```
+## [1] 15
+```
+
+```r
 x + x
 ```
 
+```
+## [1] 20
+```
+
 or we can create new objects using `x`:
+
 
 ```r
 y <- x + x + 5
@@ -83,9 +110,14 @@ y <- x + x + 5
 
 Let's try something different:
 
+
 ```r
 x <- c(2, 4, 6)
 x
+```
+
+```
+## [1] 2 4 6
 ```
 
 Two things:
@@ -95,10 +127,29 @@ Two things:
 
 Using the `[]`, we can access individual elements of this object:
 
+
 ```r
 x[1]
+```
+
+```
+## [1] 2
+```
+
+```r
 x[2]
+```
+
+```
+## [1] 4
+```
+
+```r
 x[3]
+```
+
+```
+## [1] 6
 ```
 
 ---
@@ -107,8 +158,19 @@ x[3]
 
 What is the content of this vector?
 
+
 ```r
 q <- c(x, x, 5)
+```
+
+What is the value of `y` at the end of this script?
+
+
+```r
+x <- 1
+y <- x + 2
+x <- 3
+# y <- ???
 ```
 
 ---
@@ -116,9 +178,22 @@ q <- c(x, x, 5)
 We can also use these objects with functions, for instance to compute the mean
 and the standard deviation:
 
+
 ```r
+x <- c(1, 3, 5, 6, 3, 5)
 mean(x)
-sd(d)
+```
+
+```
+## [1] 3.833333
+```
+
+```r
+sd(x)
+```
+
+```
+## [1] 1.834848
 ```
 
 This is useful to print the value of the mean or the standard deviation, but we
@@ -227,7 +302,7 @@ fav_colors[c(2,3,2,4,1,2)]
 or if the vector is named, it can be accessed by the names of the elements:
 
 ```r
-fav_colors["John"]
+fav_colors[c("John")]
 ```
 
 ---
@@ -388,6 +463,7 @@ x + c(2, 4, 6, 8, 10, 12, 14) # warning
 
 ```r
 u <- c(1, 4, 2, 5, 6, 3, 7)
+u[TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE]
 u < 3
 u[u < 3]
 u[u < 3 | u >= 4]
