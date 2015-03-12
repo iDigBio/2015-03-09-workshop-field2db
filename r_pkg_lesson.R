@@ -16,18 +16,19 @@
 ## 3) Install the following R packages: rnoaa, ridigbio, plotly, gridExtra
 ##
 ## On Ubuntu, needed at least these libraries: apt-get install libgdal-dev 
-## libproj-dev
+## libproj-dev to install rnoaa
 ## 
 
 ## Install packages
 
-## You almost certainly have these installed already
+## You almost certainly have these installed already, please don't re-install
+## them.
 ##install.packages("devtools")
 ##install.packages("jsonlite")
 ##install.packages("grid")
 ##install.packages("ggplot2")
 
-## You need to install these
+## You will need to install these
 #library("devtools")
 #install.packages("gridExtra")
 #install.packages("rnoaa")
@@ -37,8 +38,8 @@
 
 ## Load survey & species data from Portal, AZ
 
-species <- read.csv("R/species.csv", stringsAsFactors=FALSE)
-surveys <- read.csv("R/surveys.csv", stringsAsFactors=FALSE)
+species <- read.csv("data/species.csv", stringsAsFactors=FALSE)
+surveys <- read.csv("data/surveys.csv", stringsAsFactors=FALSE)
 
 ## What are we interested in?
 
@@ -80,7 +81,8 @@ library("ridigbio")
 
 ## Remember the JSON out, JSON in slide from the API introduction? We're going
 ## to have to build a data structure that R can transform into the JSON the API
-## expects to see. 
+## expects to see. This is something ridigbio has chosen to use, not all
+## packages work this way.
 
 query <- list("scientificname"=paste(gen, sp))
 
@@ -118,7 +120,7 @@ cha_pen_idig_months <- format(
 ##  Do step 3 and add the cha_pen_idig_months column to the cha_pen_idig data 
 ## frame as "monthcollected". The next line won't work until you do.
 
-cha_pen_idig <- cbind(
+#cha_pen_idig <- cbind(
 
   
 ## Now let's make a histogram on month collected.
@@ -142,7 +144,7 @@ hist(survey_cha_pen$month, breaks=1:12)
 
 ## Start by loading the library and filling in the web token you got from
 ## NOAA via email. Also, the station name is long to type so let's save it as a
-## variable too.
+## variable too. (tlnrvjzLToJojhXEsUYzeGNmUEUHurYk)
 
 library("rnoaa")
 tok <- ""
@@ -158,7 +160,8 @@ stn <- "GHCND:USC00026716"
 ## Use "?" to look at the help for the ncdc_datasets function. Call the 
 ## function to get a list of the datasets the station has availible.
 
-ncdc_datasets(
+#ncdc_datasets(
+
 
 ## After you've met the challenge above, just type in the name of the dataset
 ## that has the monthly summaries into the assignment below.
@@ -218,7 +221,7 @@ lines(mean_temp$degf, type="h")
 ## get ready to make a layout with the collection histogram above the 
 ## temperature plot.
 
-par(
+#par(
 
   
 ## Now let's draw both our graphs again on the same layout:
@@ -231,11 +234,13 @@ lines(mean_temp$degf, type="h")
 
 ## BACK TO POWERPOINT!
 
+
 ## The plot.ly URL: https://plot.ly/ggplot2/getting-started/
 ##
 ## Paste in the rest of your credentials here:
 
-set_credentials_file(
+library("plotly")
+#set_credentials_file(
 
 
 ## We're going to go really fast here. I had hoped to use rfigshare but is has

@@ -55,7 +55,7 @@ make a web API?
 # A little about how the web works
 
 It helps to understand a bit about how the web works in order to understand web 
-APIs. Web APIs use the protocol of the web, hypter-text transfer protocol 
+APIs. Web APIs use the protocol of the web, hyper-text transfer protocol 
 (HTTP), to move commands and data from your program to a server somewhere and 
 back.
 
@@ -74,6 +74,7 @@ information too but we're not going to talk about that today), so we can just
 look at it all and intuit what it means:
 
 ```
+
 mcollins@mjc:~$ telnet www.textfiles.com 80
 Trying 208.86.224.90...
 Connected to www.textfiles.com.
@@ -102,15 +103,12 @@ desperately to save for a historical archive. Please consider visit our site and
 helping us with collecting, education, and writing.
 <p>
 <img src="CoCollegePark8762construct.gif">
-<img src="HeHeartlandFlats7015underconstruction.gif">
-<img src="AtAthensAcropolis6558underconstruction.gif">
-....more images left out...
+
 ```
 
 ### Challenge
 
-> How do you know how to interpret the text that you get back from the web 
-> server?
+> How do you know what type of text you got back from the web server?
 
 Remember our goal of being able to read documentation? In order to do that, we 
 need to learn the terms that are used for some the different parts of the text 
@@ -120,7 +118,7 @@ that goes back and forth using HTTP.
 
 <image highlighting parts of the HTTP transfer above>
 
-So, to rephrase HTTP using our new terms:
+So, to rephrase HTTP using web API terms:
 
 1. Request a URL (Uniform Resource Locator) from a server made up of:
     1. Server name
@@ -168,13 +166,13 @@ coolest format.)
 
 JSON is a *notation* for representing *objects* as text that can be directly 
 executed in *Javascript* as code and will result in a data structure that can 
-be assigned to a variable.
+be assigned to a variable. Think ```data <- parse(JSON)``` in R.
 
 Although this was originally made for Javascript, many other languages can 
 interpret it. Again, you'll get help with the interpretation from your language 
 later just like you'll get help with HTTP.
 
-What can we denote? Objects and arrays. Here's the main part of the BNF 
+What can we denote? Objects and arrays. Here's the main part of the BNF-style 
 description of the syntax of JSON:
 
 ![Objects](image/object.gif)
@@ -287,14 +285,15 @@ kingdom.
 ### Challenge
 
 > In your browser address bar, type in an API call to the top records end point 
-> that returns the 3 most frequent species names in iDigBio.
+> that returns the 3 most frequent species names in iDigBio. (Hint: species name
+> is the default field.)
 
 ---
 
 ## JSON out, JSON in too
 
 APIs return JSON but they can also take JSON as well. Look carefully at the 
-example:
+example from above:
 
 ```
 /v2/summary/top/records/?fields=["kingdom","phylum"]&count=10
@@ -314,11 +313,11 @@ the array of field names we want to use.
 ## What about my programming language?
 
 All this HTTP and text is great but really what you want are functions and 
-variables in your programming language. Write a program is what you were 
+variables in your programming language. Writing a program is what you were 
 originally trying to do.
 
 This is where *packages* in R come in to play. (*Packages* are also called 
-*libraries* in other languages.) Installing and configuring packages is another 
+*libraries*.) Installing and configuring packages is another 
 lesson and we'll spend another full session working with packages that use APIs 
 in R shortly. As a start, consider this R code as your final challenge:
 
@@ -326,9 +325,8 @@ in R shortly. As a start, consider this R code as your final challenge:
 
 > Describe in English what this R code does:
 
-     import ridigbio
-     tops <- idig_top_records(rq=list("genus"="acer"), 
-                              top_fields=c("institutioncode"),
+     library("ridigbio")
+     tops <- idig_top_records(top_fields=c("institutioncode", "genus"),
                               count=3)
      names(tops$institutioncode)
 
